@@ -44,7 +44,7 @@ class Medio {
         int m = calcularm(k);
         
         double  r[][] = new double[n][5];
-        for (int i = 0; i < n-1; i++) {
+        for (int i = 0; i < n; i++) {
             r[i][0] = x0;
             r[i][1] = x1;
             r[i][2] = x0 * x1;
@@ -55,6 +55,23 @@ class Medio {
 //            }
             x0 = x1;
             x1 = r[i][3];
+        }
+        return r;
+    }
+    public double[][] productoVariado(double x0, int a, int k, int n) {
+        
+        int m = calcularm(k);
+        
+        double  r[][] = new double[n][4];
+        for (int i = 0; i < n; i++) {
+            r[i][0] = x0;
+            r[i][1] = a * x0;
+            r[i][2] = medio(Integer.toString((int)r[i][1]) ,k);
+            r[i][3] = r[i][2]/m;
+//            if (buscarCiclo(r[i][2],r) == true) {
+//                i = n;
+//            }
+            x0 = r[i][2];
         }
         return r;
     }
@@ -122,7 +139,9 @@ public class Simulacion {
     public static void main(String[] args) {
         
         Medio obj1 = new Medio();
-        obj1.mostrar(obj1.producto(420,180, 3, 10));
+        obj1.mostrar(obj1.cuadrado(580, 3, 10));
+        obj1.mostrar(obj1.producto(420, 180, 3, 10));
+        obj1.mostrar(obj1.productoVariado(382, 125, 3, 10));
     }
     
 }
