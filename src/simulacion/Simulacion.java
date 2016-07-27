@@ -39,6 +39,25 @@ class Medio {
         }
         return r;
     }
+    public double[][] producto(double x0, double x1, int k, int n) {
+        
+        int m = calcularm(k);
+        
+        double  r[][] = new double[n][5];
+        for (int i = 0; i < n-1; i++) {
+            r[i][0] = x0;
+            r[i][1] = x1;
+            r[i][2] = x0 * x1;
+            r[i][3] = medio(Integer.toString((int)r[i][2]) ,k);
+            r[i][4] = r[i][3]/m;
+//            if (buscarCiclo(r[i][2],r) == true) {
+//                i = n;
+//            }
+            x0 = x1;
+            x1 = r[i][3];
+        }
+        return r;
+    }
     public int medio(String yn, int k){
         
         int x, m;
@@ -92,7 +111,6 @@ class Medio {
             System.out.println("");
         }
     }
-    
 }
 
 
@@ -104,9 +122,7 @@ public class Simulacion {
     public static void main(String[] args) {
         
         Medio obj1 = new Medio();
-        obj1.mostrar(obj1.cuadrado(580, 3, 10));
+        obj1.mostrar(obj1.producto(420,180, 3, 10));
     }
-    
-    
     
 }
