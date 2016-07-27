@@ -90,6 +90,21 @@ class Generador {
         }
         return r;
     }
+    public double[][] mixto(double x0, int a, int c, int m, int n) {
+        
+        double  r[][] = new double[n][4];
+        for (int i = 0; i < n; i++) {
+            r[i][0] = x0;
+            r[i][1] = (a*x0) + c;
+            r[i][2] = congruencial(r[i][1], m);
+            r[i][3] = r[i][2]/m;
+//            if (buscarCiclo(r[i][2],r) == true) {
+//                i = n;
+//            }
+            x0 = r[i][2];
+        }
+        return r;
+    }
     public double congruencial(double yn, int m) {
         
         double r;
@@ -160,10 +175,11 @@ public class Simulacion {
     public static void main(String[] args) {
         
         Generador obj1 = new Generador();
-        obj1.mostrar(obj1.cuadrado(580, 3, 10));
-        obj1.mostrar(obj1.producto(420, 180, 3, 10));
-        obj1.mostrar(obj1.productoVariado(382, 125, 3, 10));
-        obj1.mostrar(obj1.multiplicativo(9, 11, 128, 10));
+//        obj1.mostrar(obj1.cuadrado(580, 3, 10));
+//        obj1.mostrar(obj1.producto(420, 180, 3, 10));
+//        obj1.mostrar(obj1.productoVariado(382, 125, 3, 10));
+//        obj1.mostrar(obj1.multiplicativo(9, 11, 128, 10));
+        obj1.mostrar(obj1.mixto(522, 47, 61, 1000, 10));
     }
     
 }
