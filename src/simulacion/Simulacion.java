@@ -206,7 +206,8 @@ public class Simulacion {
     public static void main(String[] args) {
         
         // Interfaz grafica
-        configStyleGUI("Windows");
+        configStyleGUI("Windows"); //Estilo o Diseño
+        // Orden de los parametros de la ventana: (ancho,altura,titulo)
         SimulacionGUI GUI = new SimulacionGUI(600,400,"Simulación");
         mostrarGUI(GUI);
         // Fin
