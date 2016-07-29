@@ -16,13 +16,8 @@ import javax.swing.JPanel;
 public class SimulacionGUI extends JFrame {
 
     // VARIABLES
-    // variable y metodo que modifica el nombre de la ventana.
+    // titulo de la vista principal
     private String titulo;
-
-    public void setTitulo(String nuevotitulo) {
-        titulo = nuevotitulo;
-        setTitle(titulo);
-    }
 
     // variable y metodo que modifica el tamaño de la ventana y actualiza la vista.
     private Dimension tamaño;
@@ -39,13 +34,13 @@ public class SimulacionGUI extends JFrame {
     // PANEL PRINCIPAL - VISTA 1
     JPanel VistaPrincipal;
 
-    void oncreateVistaPrincipal() {
+    private void oncreateVistaPrincipal() {
         VistaPrincipal = new JPanel();
-        JButton BtnSalir = new javax.swing.JButton();
-        JButton BtnProyecto = new javax.swing.JButton();
-        JButton BtnMetodos = new javax.swing.JButton();
+        JButton BtnSalir = new JButton();
+        JButton BtnProyecto = new JButton();
+        JButton BtnMetodos = new JButton();
 
-        VistaPrincipal.setBackground(new java.awt.Color(101, 101, 255));
+        VistaPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         VistaPrincipal.setForeground(new java.awt.Color(0, 51, 51));
         // Se le asigna el tamaño de la ventana.
         VistaPrincipal.setMaximumSize(tamaño);
@@ -53,7 +48,6 @@ public class SimulacionGUI extends JFrame {
         VistaPrincipal.setPreferredSize(tamaño);
         VistaPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        BtnProyecto.setBackground(new java.awt.Color(110, 110, 255));
         BtnProyecto.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 24)); // NOI18N
         BtnMetodos.setForeground(new java.awt.Color(0, 0, 0));
         BtnProyecto.setText("Proyecto");
@@ -65,11 +59,11 @@ public class SimulacionGUI extends JFrame {
                 // Removiendo de la ventana (Sacandola, no eliminandola) la vista actual
                 removeComponent(VistaPrincipal);
                 // Para Añadir (Cargar o enlazar) la vista a donde se quiere ir.
-                addComponent(VistaProyecto, "Center");
+                addComponent(VistaProyecto, "Center", "Proyecto");
+                updateView();
             }
         });
 
-        BtnMetodos.setBackground(new java.awt.Color(110, 110, 255));
         BtnMetodos.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         BtnMetodos.setForeground(new java.awt.Color(0, 102, 0));
         BtnMetodos.setText("Metodos");
@@ -79,7 +73,6 @@ public class SimulacionGUI extends JFrame {
             }
         });
 
-        BtnSalir.setBackground(new java.awt.Color(110, 110, 255));
         BtnSalir.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         BtnSalir.setForeground(new java.awt.Color(102, 0, 51));
         BtnSalir.setText("Salir");
@@ -88,19 +81,22 @@ public class SimulacionGUI extends JFrame {
                 System.exit(0);
             }
         });
+
         int pos_inicalY = 100;
         int AlturaBtn = 40;
-
-        VistaPrincipal.add(BtnProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, pos_inicalY, 160, AlturaBtn));
-        VistaPrincipal.add(BtnMetodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, pos_inicalY += 50, 220, AlturaBtn));
-        VistaPrincipal.add(BtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, pos_inicalY += 50, 120, AlturaBtn));
+        // Recordar ubicar los elementos en los ejes X y Y.
+        // AbsoluteLayout: AbsoluteConstraints(posicion en x, posicion en y, ancho del elemento,altura de elemento)
+        VistaPrincipal.add(BtnProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, pos_inicalY, 160, AlturaBtn));
+        VistaPrincipal.add(BtnMetodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, pos_inicalY += 50, 220, AlturaBtn));
+        VistaPrincipal.add(BtnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, pos_inicalY += 50, 120, AlturaBtn));
 
     }
 
     JPanel VistaProyecto;
 
-    void oncreateVistaProyecto() {
+    private void oncreateVistaProyecto() {
         VistaProyecto = new JPanel();
+        JButton BtnAtras = new JButton();
 
         VistaProyecto.setBackground(new java.awt.Color(100, 100, 100));
         VistaProyecto.setForeground(new java.awt.Color(0, 51, 51));
@@ -109,11 +105,32 @@ public class SimulacionGUI extends JFrame {
         VistaProyecto.setMinimumSize(tamaño);
         VistaProyecto.setPreferredSize(tamaño);
         VistaProyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnAtras.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
+        BtnAtras.setForeground(new java.awt.Color(102, 0, 51));
+        BtnAtras.setText("Atras");
+        BtnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                System.out.println("Principal");
+                // Removiendo de la ventana (Sacandola, no eliminandola) la vista actual
+                removeComponent(VistaProyecto);
+                // Para Añadir (Cargar o enlazar) la vista a donde se quiere ir.
+                addComponent(VistaPrincipal, "Center", "Menu Principal");
+                updateView();
+            }
+        });
+
+        int pos_inicalY = 250;
+        int AlturaBtn = 40;
+        // Recordar ubicar los elementos en los ejes X y Y.
+        // AbsoluteLayout: AbsoluteConstraints(posicion en x, posicion en y, ancho del elemento,altura de elemento)
+        VistaProyecto.add(BtnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, pos_inicalY += 50, 120, AlturaBtn));
+
     }
 
     JPanel VistaMetodos;
 
-    void oncreateVistaMetodos() {
+    private void oncreateVistaMetodos() {
         VistaMetodos = new JPanel();
 
         VistaMetodos.setBackground(new java.awt.Color(58, 200, 48));
@@ -127,8 +144,9 @@ public class SimulacionGUI extends JFrame {
 
     // METODOS DE LA VENTANA
     // metodo para asignar los valores iniciales de la ventana.
-    private void initFrame(int ancho, int altura, String titulo) {
-        setTitulo(titulo);// Nombre de ventana
+    private void initFrame(int ancho, int altura, String inittitulo) {
+        this.titulo = inittitulo;
+        setTitle(titulo);// Nombre de ventana
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);    // salir al cerrar ventana
         // layout de la ventana(la forma como se van a ubicar los paneles en la ventana)
         getContentPane().setLayout(new java.awt.BorderLayout(0, 0));
@@ -150,9 +168,10 @@ public class SimulacionGUI extends JFrame {
      * @param ubicacion: values:
      * North,South,East,West,Center,First,Last,Before,After.
      */
-    private void addComponent(JPanel c, String ubicacion) {
+    private void addComponent(JPanel c, String ubicacion, String title) {
         // Component + valor de la constante del BorderLayout
         getContentPane().add(c, ubicacion);
+        setTitle(title);
     }
 
     //metodo que elimina una vista
@@ -162,7 +181,12 @@ public class SimulacionGUI extends JFrame {
 
     // CONSTRUCTOR
     public SimulacionGUI(int ancho, int altura, String titulo) {
+        // se crean las vistas
+        oncreateVistaPrincipal();
+        oncreateVistaProyecto();
+        oncreateVistaMetodos();
         initFrame(ancho, altura, titulo);
+        addComponent(VistaPrincipal, "Center", titulo);
     }
 
 }
