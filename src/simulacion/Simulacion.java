@@ -169,17 +169,54 @@ class Generador {
 
 public class Simulacion {
 
-    /**
+     /** metodo que determina el estilo de la GUI. 
+     * Cada elemento adopta el estilo determinado.
+     * @param style. posibles valores: (Metal, Nimbus, CDE/Motif, Windows)
+     */
+    static void configStyleGUI(String style) {
+
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                System.out.println(info.getName());
+                if (style.equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            //  Para ver los log del sistema. Descomente siguiente linea. 
+            //  java.util.logging.Logger.getLogger(ProyectoSimulacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            System.out.println(" Error al agregar un estilo a la ventana.");
+        }
+    }
+    
+    //  metodo que hace visible la ventana.
+    static void mostrarGUI(SimulacionGUI obj) {
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                obj.setVisible(true);
+            }
+        });  
+    }
+    
+     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
+        // Interfaz grafica
+        configStyleGUI("Windows");
+        SimulacionGUI GUI = new SimulacionGUI(600,400,"Simulación");
+        mostrarGUI(GUI);
+        // Fin
         Generador obj1 = new Generador();
 //        obj1.mostrar(obj1.cuadrado(580, 3, 10));
 //        obj1.mostrar(obj1.producto(420, 180, 3, 10));
 //        obj1.mostrar(obj1.productoVariado(382, 125, 3, 10));
 //        obj1.mostrar(obj1.multiplicativo(9, 11, 128, 10));
         obj1.mostrar(obj1.mixto(522, 47, 61, 1000, 10));
+        
     }
     
 }
