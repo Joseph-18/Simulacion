@@ -157,7 +157,7 @@ class Generador {
         
         for (int i = 0; i < r.length; i++) {
             System.out.println("i: "+(i+1));
-            System.out.print("Xn: "+ (int)r[i][0]);
+            System.out.print(" Xn: "+ (int)r[i][0]);
             System.out.print(" Yn: "+ (int)r[i][1]);
             System.out.print(" Xn+1: "+ (int)r[i][2]);
             System.out.print(" Rn+1: "+ r[i][3]);
