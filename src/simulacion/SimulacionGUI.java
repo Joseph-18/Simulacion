@@ -1,11 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
  */
 package simulacion;
 
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,7 +16,7 @@ public class SimulacionGUI extends JFrame {
     // VARIABLES
     // titulo de la vista principal
     private String titulo;
-
+    
     // variable y metodo que modifica el tamaño de la ventana y actualiza la vista.
     private Dimension tamaño;
 
@@ -53,7 +51,7 @@ public class SimulacionGUI extends JFrame {
         BtnProyecto.setText("Proyecto");
         BtnProyecto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         //metodo
-        BtnProyecto.addActionListener(new java.awt.event.ActionListener() {
+        BtnProyecto.addActionListener(new ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 System.out.println("Proyectos");
                 // Removiendo de la ventana (Sacandola, no eliminandola) la vista actual
@@ -67,7 +65,7 @@ public class SimulacionGUI extends JFrame {
         BtnMetodos.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         BtnMetodos.setForeground(new java.awt.Color(0, 102, 0));
         BtnMetodos.setText("Metodos");
-        BtnMetodos.addActionListener(new java.awt.event.ActionListener() {
+        BtnMetodos.addActionListener(new ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 System.out.println("Metodos");
                                 System.out.println("Proyectos");
@@ -82,7 +80,7 @@ public class SimulacionGUI extends JFrame {
         BtnSalir.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         BtnSalir.setForeground(new java.awt.Color(102, 0, 51));
         BtnSalir.setText("Salir");
-        BtnSalir.addActionListener(new java.awt.event.ActionListener() {
+        BtnSalir.addActionListener(new ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 System.exit(0);
             }
@@ -115,7 +113,7 @@ public class SimulacionGUI extends JFrame {
         BtnAtras.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         BtnAtras.setForeground(new java.awt.Color(102, 0, 51));
         BtnAtras.setText("Atras");
-        BtnAtras.addActionListener(new java.awt.event.ActionListener() {
+        BtnAtras.addActionListener(new ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 System.out.println("Principal");
                 // Removiendo de la ventana (Sacandola, no eliminandola) la vista actual
@@ -147,10 +145,6 @@ public class SimulacionGUI extends JFrame {
         VistaMetodos.setMinimumSize(tamaño);
         VistaMetodos.setPreferredSize(tamaño);
         VistaMetodos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        
-
-
-
 
         BtnAtras.setFont(new java.awt.Font("Lucida Sans", 1, 24)); // NOI18N
         BtnAtras.setForeground(new java.awt.Color(102, 0, 51));
@@ -159,7 +153,7 @@ public class SimulacionGUI extends JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 System.out.println("Principal");
                 // Removiendo de la ventana (Sacandola, no eliminandola) la vista actual
-                removeComponent(VistaProyecto);
+                removeComponent(VistaMetodos);
                 // Para Añadir (Cargar o enlazar) la vista a donde se quiere ir.
                 addComponent(VistaPrincipal, "Center", "Menu Principal");
                 updateView();
@@ -187,7 +181,7 @@ public class SimulacionGUI extends JFrame {
         pack(); // construye las vistas y aplica cambios visuales
     }
 
-    //metodo que renderiza la vista luego de agregar o eliminar un elemento a la ventana.
+    // metodo que renderiza la vista luego de agregar o eliminar un elemento a la ventana.
     private void updateView() {
         pack();
         repaint();
@@ -195,7 +189,6 @@ public class SimulacionGUI extends JFrame {
 
     /**
      * metodo que agrega una vista a la ventana.
-     *
      * @param c: type: JPanel
      * @param ubicacion: values:
      * North,South,East,West,Center,First,Last,Before,After.
