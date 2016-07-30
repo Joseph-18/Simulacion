@@ -24,7 +24,7 @@ public class SimulacionGUI extends JFrame {
         this.tamaño = new Dimension(ancho, altura);
         setMaximumSize(tamaño);
         setMinimumSize(tamaño);
-        setPreferredSize(tamaño);
+        setPreferredSize(tamaño);         
         pack();
     }
 
