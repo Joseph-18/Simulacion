@@ -165,7 +165,88 @@ class Generador {
         }
     }
 }
-
+// clases para almacenar los datos de las tablas del enunciado.
+class Tablas{
+       double[] F; // Declarado para aplicar la herencia de los metodos.
+       
+       /** metodo que devuelve los rangos para ser renderizados en las vistas.
+       * @return: rangos en forma de arreglo de cadenas
+       */
+       public String[] getRangos(){ // a heredar
+           String[] rangos = new String[8];
+           String ant="000";
+           for (int i = 0; i < F.length; i++) {
+                rangos[i]= ant+" - "+String.valueOf((F[i]*1000)-1);
+                ant=String.valueOf(F[i]*1000);
+           }
+       return null;
+       
+       };
+    
+     class tabla1 extends Tablas{
+       double[] fx= {0.050,0.150,0.220,0.220,0.170,0.110,0.050,0.030};
+       double[] F= {0.050,0.200,0.420,0.640,0.810,0.920,0.970,1.0};
+         
+       /** metodo que realiza el calculo del n° de camiones que llegan en un dia.
+        * @param rn: Un numero pseudoaletorio
+        * @return: N° de camiones que llegaron al dia
+        */
+       int getCamiones(double rn){
+           rn*=1000;
+           for (int i = 0; i < F.length; i++) {
+                // se realiza el calculo del rango internamente
+                if (rn <= ((F[i]*1000)-1)){
+                    // solo para en este caso el valor el numero de camiones coincide con el valor de i
+                    return i;// por esa razon retornamos i.  
+                }
+           }
+           return -1; // error
+       };
+       
+    }
+    
+    class tabla3 extends Tablas{
+       char [] tcarga={'A','B','C'};
+       double[] fx= {0.400,0.350,0.250};
+       double[] F= {0.400,0.,0.420,0.640,0.810,0.920,0.970,1.0};
+ 
+       /** metodo que realiza el calculo del n° de camiones que llegan en un dia.
+        * @param rn: Un numero pseudoaletorio
+        * @return: N° de camiones que llegaron al dia
+        */
+       char getTcarga(double rn){
+           rn*=1000;
+           for (int i = 0; i < F.length; i++) {
+                // se realiza el calculo del rango internamente
+                if (rn <= ((F[i]*1000)-1)){
+                    return tcarga[i];
+                }
+           }
+           return '#'; // error
+       };
+    }
+    
+     class tabla2 extends Tablas{
+       int [] kg={5000,10000,15000,20000,25000,30000,35000};// se puede sustituir por una multipliacion de (i+1)+5000
+       double[] fx= {0.080,0.110,0.150,0.230,0.200,0.130,0.100};
+       double[] F= {0.80,0.190,0.340,0.570,0.770,0.900,1.000};
+ 
+       /** metodo que realiza el calculo del n° de Kilogramos que llegan en un dia.
+        * @param rn: Un numero pseudoaletorio
+        * @return: N° de camiones que llegaron al dia
+        */
+       int getKilogramos(double rn){
+           rn*=1000;
+           for (int i = 0; i < F.length; i++) {
+                // se realiza el calculo del rango internamente
+                if (rn <= ((F[i]*1000)-1)){
+                    return kg[i];
+                }
+           }
+           return -1; // error
+       };
+    }
+}
 
 public class Simulacion {
 
