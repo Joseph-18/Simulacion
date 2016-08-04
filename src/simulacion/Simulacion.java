@@ -289,7 +289,7 @@ public class Simulacion {
         // Interfaz grafica
         configStyleGUI("Windows"); //Estilo o Diseño
         // Orden de los parametros de la ventana: (ancho,altura,titulo)
-        SimulacionGUI GUI = new SimulacionGUI(600,400,"Simulación");
+        SimulacionGUI GUI = new SimulacionGUI(800,600,"Simulación");
         mostrarGUI(GUI);
         // Fin
         Generador obj1 = new Generador();
