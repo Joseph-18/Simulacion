@@ -292,7 +292,7 @@ public class Simulacion {
         SimulacionGUI GUI = new SimulacionGUI(800,600,"Simulación");
         mostrarGUI(GUI);
         // Fin
-        Generador obj1 = new Generador();
+        Generador obj1 = new Generador();        
 //        obj1.mostrar(obj1.cuadrado(580, 3, 10));
 //        obj1.mostrar(obj1.producto(420, 180, 3, 10));
 //        obj1.mostrar(obj1.productoVariado(382, 125, 3, 10));
