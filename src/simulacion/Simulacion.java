@@ -5,12 +5,9 @@
  */
 package simulacion;
 
-import java.util.Formatter;
-
-
 /**
  *
- * @author Joseph Perez
+ * @authores Joseph Perez, Gabriel Rodriguez
  */
 
 class Generador {
@@ -166,24 +163,23 @@ class Generador {
     }
 }
 // clases para almacenar los datos de las tablas del enunciado.
-class Tablas{
-       double[] F; // Declarado para aplicar la herencia de los metodos.
+class Tablas {
+    double[] F; // Declarado para aplicar la herencia de los metodos.
        
-       /** metodo que devuelve los rangos para ser renderizados en las vistas.
-       * @return: rangos en forma de arreglo de cadenas
-       */
-       public String[] getRangos(){ // a heredar
+    /** metodo que devuelve los rangos para ser renderizados en las vistas.
+    * @return: rangos en forma de arreglo de cadenas
+    */
+    public String[] getRangos(){ // a heredar
            String[] rangos = new String[8];
            String ant="000";
            for (int i = 0; i < F.length; i++) {
                 rangos[i]= ant+" - "+String.valueOf((F[i]*1000)-1);
                 ant=String.valueOf(F[i]*1000);
            }
-       return null;
-       
+           return null;
        };
     
-     class tabla1 extends Tablas{
+    class numeroCamiones extends Tablas{
        double[] fx= {0.050,0.150,0.220,0.220,0.170,0.110,0.050,0.030};
        double[] F= {0.050,0.200,0.420,0.640,0.810,0.920,0.970,1.0};
          
@@ -201,11 +197,9 @@ class Tablas{
                 }
            }
            return -1; // error
-       };
-       
+       };  
     }
-    
-    class tabla3 extends Tablas{
+    class tipoCargas extends Tablas{
        char [] tcarga={'A','B','C'};
        double[] fx= {0.400,0.350,0.250};
        double[] F= {0.400,0.,0.420,0.640,0.810,0.920,0.970,1.0};
@@ -225,8 +219,7 @@ class Tablas{
            return '#'; // error
        };
     }
-    
-     class tabla2 extends Tablas{
+    class kilogramos extends Tablas{
        int [] kg={5000,10000,15000,20000,25000,30000,35000};// se puede sustituir por una multipliacion de (i+1)+5000
        double[] fx= {0.080,0.110,0.150,0.230,0.200,0.130,0.100};
        double[] F= {0.80,0.190,0.340,0.570,0.770,0.900,1.000};
@@ -245,6 +238,64 @@ class Tablas{
            }
            return -1; // error
        };
+    }
+}
+
+class Resultado {
+    int x0,k,n,x1,a,m,c;
+    Generador obj1 = new Generador();
+    Tablas t1 = new Tablas();
+    
+    public int tabla(int n, int g, int t) {
+        
+        int cant = 0;
+        double rn;
+        
+        for (int i = 0; i < n; i++) {
+            rn = generador(g);
+            cant += get(t,rn);
+        }
+        return cant;
+    }
+    public double[][] generador(int g) {
+        double [][] r = new double[n][];
+        switch (g) {
+            case 1:
+                r = obj1.cuadrado(x0,k,n);
+                break;
+            case 2:
+                r = obj1.producto(x0,x1,k,n);
+                break;
+            case 3:
+                r = obj1.productoVariado(x0,a,k,n);
+                break;
+            case 4:
+                r = obj1.multiplicativo(x0,a,m,n);
+                break;
+            case 5:
+                r = obj1.mixto(x0,a,c,m,n);
+                break;
+            default:
+                return r;
+        }
+        return r;
+    }
+    public int get(int t, double rn) {
+        
+        switch (t) {
+            case 1:
+                return t1.(rn);
+                break;
+            case 2:
+                return getCargas(rn);
+                break;
+            case 3:
+                return getKilogramos(rn);
+                break;
+            default:
+                return -1;
+        }
+        return 0;
     }
 }
 
