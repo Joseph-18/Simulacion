@@ -37,21 +37,25 @@ public class VentanaMetodos extends javax.swing.JFrame {
                 int x1 = a;// en la vista inicial se almacenara en la variable a el valor de x1
                 tabla = gen.producto(x0, x1, k, n);
                 setTitle("Producto Medio");
+                parametros += "Xo = " + (int) x0 + ", X1 = " + (int) x1 + ", K = " + k + ", n = " + n;
                 break;
             }
             case 2: {//Producto Medio Variado
-                gen.productoVariado(x0, a, k, n);
+                tabla = gen.productoVariado(x0, a, k, n);
                 setTitle("Producto Medio Variado");
+                parametros += "Xo = " + (int) x0 + ", a = " + (int) a + ", K = " + k + ", n = " + n;
                 break;
             }
             case 3: {//Congruencial Multiplicativo
-                gen.multiplicativo(x0, a, m, n);
+                tabla = gen.multiplicativo(x0, a, m, n);
                 setTitle("Congruencial Multiplicativo");
+                parametros += "Xo = " + (int) x0 + ", a = " + (int) a + ", m = " + m + ", n = " + n;
                 break;
             }
             case 4: {//Congruencial Mixto
-                gen.mixto(x0, a, c, m, n);
+                tabla = gen.mixto(x0, a, c, m, n);
                 setTitle("Congruencial Mixto");
+                parametros += "Xo = " + (int) x0 + ", a = " + (int) a + ", c = " + (int) c + ", m = " + m + ", n = " + n;
                 break;
             }
         };

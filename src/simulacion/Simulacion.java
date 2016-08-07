@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package simulacion;
-
 /**
  *
  * @authores Joseph Perez, Gabriel Rodriguez
@@ -177,7 +176,6 @@ class Tablas {
            }
            return null;
        };
-    
     class numeroCamiones {
        double[] fx= {0.050,0.150,0.220,0.220,0.170,0.110,0.050,0.030};
        double[] F= {0.050,0.200,0.420,0.640,0.810,0.920,0.970,1.0};
@@ -239,7 +237,6 @@ class Tablas {
        };
     }
 }
-
 // Clase para generar las tablas de resultado aplicando el metodo de montecarlos
 class Resultado extends Tablas {
     int x0,k,n,x1,a,m,c;
@@ -311,10 +308,10 @@ class Resultado extends Tablas {
 
 public class Simulacion {
 
-     /** metodo que determina el estilo de la GUI. 
-     * Cada elemento adopta el estilo determinado.
-     * @param style. posibles valores: (Metal, Nimbus, CDE/Motif, Windows)
-     */
+    /** metodo que determina el estilo de la GUI. 
+    * Cada elemento adopta el estilo determinado.
+    * @param style. posibles valores: (Metal, Nimbus, CDE/Motif, Windows)
+    */
     static void configStyleGUI(String style) {
 
         try {
@@ -331,7 +328,6 @@ public class Simulacion {
             System.out.println(" Error al agregar un estilo a la ventana.");
         }
     }
-    
     //  metodo que hace visible la ventana.
     static void mostrarGUI(SimulacionGUI obj) {
         
@@ -341,19 +337,18 @@ public class Simulacion {
             }
         });  
     }
-    
-     /**
-     * @param args the command line arguments
-     */
+    /**
+    * @param args the command line arguments
+    */
     public static void main(String[] args) {
         
-//        // Interfaz grafica
-//        configStyleGUI("Windows"); //Estilo o Diseño
-//        // Orden de los parametros de la ventana: (ancho,altura,titulo)
-//        SimulacionGUI GUI = new SimulacionGUI(800,600,"Simulación");
-//        mostrarGUI(GUI);
+        // Interfaz grafica
+        configStyleGUI("Windows"); //Estilo o Diseño
+        // Orden de los parametros de la ventana: (ancho,altura,titulo)
+        SimulacionGUI GUI = new SimulacionGUI(800,600,"Simulación");
+        mostrarGUI(GUI);
         // Fin
-        Generador obj1 = new Generador();  
+        Generador obj1 = new Generador();        
         Resultado R1 = new Resultado(522, 0, 2, 0, 47, 1000, 61);
 //        obj1.mostrar(obj1.cuadrado(580, 3, 10));
 //        obj1.mostrar(obj1.producto(420, 180, 3, 10));
@@ -362,5 +357,4 @@ public class Simulacion {
 //        obj1.mostrar(obj1.mixto(522, 47, 61, 1000, 10));
         R1.tabla(5, 1);
     }
-    
 }

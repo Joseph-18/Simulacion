@@ -142,7 +142,53 @@ public class SimulacionGUI extends JFrame {
         cboxmetodop1.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Cuadrado Medio", "Producto Medio", "Producto Medio Variado", "Congruencial Mixto", "Congruencial Multiplicativo"}));
         cboxmetodop1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-
+                System.out.println(cboxmetodop1.getSelectedIndex());
+                switch (cboxmetodop1.getSelectedIndex()) {
+                    case 0: {//Cuadrado Medio
+                        formK.setVisible(true);
+                        formXo.setVisible(true);
+                        formA.setVisible(false);
+                        formC.setVisible(false);
+                        formM.setVisible(false);
+                        break;
+                    }
+                    case 1: {//Producto Medio
+                        formK.setVisible(true);
+                        formXo.setVisible(true);
+                        formA.setVisible(true);
+                        formAtext.setText("X1:");
+                        formC.setVisible(false);
+                        formM.setVisible(false);
+                        break;
+                    }
+                    case 2: {//Producto Medio Variado
+                        formK.setVisible(true);
+                        formXo.setVisible(true);
+                        formA.setVisible(true);
+                        formAtext.setText("a: ");
+                        formC.setVisible(false);
+                        formM.setVisible(false);
+                        break;
+                    }
+                    case 3: {//Congruencial Multiplicativo
+                        formK.setVisible(false);
+                        formXo.setVisible(true);
+                        formA.setVisible(true);
+                        formAtext.setText("a: ");
+                        formC.setVisible(false);
+                        formM.setVisible(true);
+                        break;
+                    }
+                    case 4: {//Congruencial Mixto
+                        formK.setVisible(false);
+                        formXo.setVisible(true);
+                        formA.setVisible(true);
+                        formAtext.setText("a: ");
+                        formC.setVisible(true);
+                        formM.setVisible(true);
+                        break;
+                    }
+                }
             }
         });
         VistaProyecto1.add(cboxmetodop1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 240, 30));
@@ -251,7 +297,7 @@ public class SimulacionGUI extends JFrame {
         formCsp.setPreferredSize(new java.awt.Dimension(60, 32));
         formC.add(formCsp);
 
-        VistaProyecto1.add(formC, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, 90, 30));
+        VistaProyecto1.add(formC, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 100, 30));
 
         formM.setLayout(new javax.swing.BoxLayout(formM, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -265,7 +311,7 @@ public class SimulacionGUI extends JFrame {
         formMsp.setMinimumSize(new java.awt.Dimension(70, 32));
         formM.add(formMsp);
 
-        VistaProyecto1.add(formM, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 100, 30));
+        VistaProyecto1.add(formM, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, 100, 30));
     }
 
     JPanel VistaMetodos1;
@@ -276,7 +322,7 @@ public class SimulacionGUI extends JFrame {
         JComboBox cboxmetodop1 = new javax.swing.JComboBox();
         JLabel titlep1 = new javax.swing.JLabel();
         JButton btnatrasp1 = new javax.swing.JButton();
-        JButton btndenerarp1 = new javax.swing.JButton();
+        JButton btngenerarp1 = new javax.swing.JButton();
         JLabel text1p2 = new javax.swing.JLabel();
         JLabel text1p3 = new javax.swing.JLabel();
         JPanel formK = new javax.swing.JPanel();
@@ -342,7 +388,7 @@ public class SimulacionGUI extends JFrame {
                         break;
                     }
                     case 3: {//Congruencial Multiplicativo
-                        formK.setVisible(true);
+                        formK.setVisible(false);
                         formXo.setVisible(true);
                         formA.setVisible(true);
                         formAtext.setText("a: ");
@@ -351,7 +397,7 @@ public class SimulacionGUI extends JFrame {
                         break;
                     }
                     case 4: {//Congruencial Mixto
-                        formK.setVisible(true);
+                        formK.setVisible(false);
                         formXo.setVisible(true);
                         formA.setVisible(true);
                         formAtext.setText("a: ");
@@ -387,9 +433,9 @@ public class SimulacionGUI extends JFrame {
         });
         VistaMetodos1.add(btnatrasp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 150, 40));
 
-        btndenerarp1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        btndenerarp1.setText("Generar");
-        btndenerarp1.addActionListener(new java.awt.event.ActionListener() {
+        btngenerarp1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        btngenerarp1.setText("Generar");
+        btngenerarp1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 int k = (int)formKsp.getValue();
                 double xo = Double.valueOf(String.valueOf(formXosp.getValue()));
@@ -399,11 +445,11 @@ public class SimulacionGUI extends JFrame {
                 int n = (int) spcantidadm1.getValue();
                  
                 new VentanaMetodos(cboxmetodop1.getSelectedIndex(),k,xo,a,c,m,n).setVisible(true); 
-                
+                System.out.println("");
             }
         });
 
-        VistaMetodos1.add(btndenerarp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 150, 40));
+        VistaMetodos1.add(btngenerarp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 150, 40));
 
         text1p2.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         text1p2.setText("Seleccione el Metodo Generador:");
@@ -471,7 +517,7 @@ public class SimulacionGUI extends JFrame {
         formCsp.setMinimumSize(new java.awt.Dimension(60, 32));
         formCsp.setPreferredSize(new java.awt.Dimension(60, 32));
         formC.add(formCsp);
-        VistaMetodos1.add(formC, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 90, 30));
+        VistaMetodos1.add(formC, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, 100, 30));
 
         text3m1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         text3m1.setText("Seleccione la cantidad de n° pseudoaletorios a generar:");
