@@ -3,5 +3,7 @@ build/
 nbbuild/
 dist/
 nbdist/
+lib/
+nbproject/*.properties
 nbactions.xml
 nb-configuration.xml
