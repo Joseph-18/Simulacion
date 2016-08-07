@@ -112,7 +112,6 @@ class Generador {
         
         int x, m;
         int yl = yn.length();
-        Formatter fmt = new Formatter();
         if (k%2 == 0) {
             if (yl%2 == 0) {
                 if (yl > k) {
@@ -179,7 +178,7 @@ class Tablas {
            return null;
        };
     
-    class numeroCamiones extends Tablas{
+    class numeroCamiones {
        double[] fx= {0.050,0.150,0.220,0.220,0.170,0.110,0.050,0.030};
        double[] F= {0.050,0.200,0.420,0.640,0.810,0.920,0.970,1.0};
          
@@ -187,7 +186,7 @@ class Tablas {
         * @param rn: Un numero pseudoaletorio
         * @return: N° de camiones que llegaron al dia
         */
-       int getCamiones(double rn){
+        int getCamiones(double rn){
            rn*=1000;
            for (int i = 0; i < F.length; i++) {
                 // se realiza el calculo del rango internamente
@@ -199,7 +198,7 @@ class Tablas {
            return -1; // error
        };  
     }
-    class tipoCargas extends Tablas{
+    class tipoCargas {
        char [] tcarga={'A','B','C'};
        double[] fx= {0.400,0.350,0.250};
        double[] F= {0.400,0.,0.420,0.640,0.810,0.920,0.970,1.0};
@@ -219,7 +218,7 @@ class Tablas {
            return '#'; // error
        };
     }
-    class kilogramos extends Tablas{
+    class kilogramos {
        int [] kg={5000,10000,15000,20000,25000,30000,35000};// se puede sustituir por una multipliacion de (i+1)+5000
        double[] fx= {0.080,0.110,0.150,0.230,0.200,0.130,0.100};
        double[] F= {0.80,0.190,0.340,0.570,0.770,0.900,1.000};
@@ -241,12 +240,22 @@ class Tablas {
     }
 }
 
-class Resultado {
+// Clase para generar las tablas de resultado aplicando el metodo de montecarlos
+class Resultado extends Tablas {
     int x0,k,n,x1,a,m,c;
-    Generador obj1 = new Generador();
-    Tablas t1 = new Tablas();
+
+    Resultado(int x0, int k, int n, int x1, int a, int m, int c) {
+        
+        this.x0 = x0;
+        this.k = k;
+        this.n = n;
+        this.x1 = x1;
+        this.a = a;
+        this.m = m;
+        this.c = c;
+    }
     
-    public int tabla(int n, int g, int t) {
+    public int tabla(int g, int t) {
         
         int cant = 0;
         double rn;
@@ -255,47 +264,48 @@ class Resultado {
             rn = generador(g);
             cant += get(t,rn);
         }
+        System.out.println("Cantidad de Camiones: "+ cant);
         return cant;
     }
-    public double[][] generador(int g) {
-        double [][] r = new double[n][];
+    public double generador(int g) {
+        double [][] r;
+        Generador obj1 = new Generador();
+        
         switch (g) {
             case 1:
                 r = obj1.cuadrado(x0,k,n);
-                break;
+                return r[0][3];
             case 2:
                 r = obj1.producto(x0,x1,k,n);
-                break;
+                return r[0][4];
             case 3:
                 r = obj1.productoVariado(x0,a,k,n);
-                break;
+                return r[0][3];
             case 4:
                 r = obj1.multiplicativo(x0,a,m,n);
-                break;
+                return r[0][3];
             case 5:
-                r = obj1.mixto(x0,a,c,m,n);
-                break;
+                r = obj1.mixto(x0,a,c,m,1);
+                return r[0][3];
             default:
-                return r;
+                return -1.0;
         }
-        return r;
     }
     public int get(int t, double rn) {
         
         switch (t) {
             case 1:
-                return t1.(rn);
-                break;
+                numeroCamiones cm = new numeroCamiones();   
+                return cm.getCamiones(rn);
             case 2:
-                return getCargas(rn);
-                break;
+                tipoCargas ca = new tipoCargas();
+                return ca.getTcarga(rn);
             case 3:
-                return getKilogramos(rn);
-                break;
+                kilogramos k = new kilogramos();
+                return k.getKilogramos(rn);
             default:
                 return -1;
         }
-        return 0;
     }
 }
 
@@ -337,19 +347,20 @@ public class Simulacion {
      */
     public static void main(String[] args) {
         
-        // Interfaz grafica
-        configStyleGUI("Windows"); //Estilo o Diseño
-        // Orden de los parametros de la ventana: (ancho,altura,titulo)
-        SimulacionGUI GUI = new SimulacionGUI(800,600,"Simulación");
-        mostrarGUI(GUI);
+//        // Interfaz grafica
+//        configStyleGUI("Windows"); //Estilo o Diseño
+//        // Orden de los parametros de la ventana: (ancho,altura,titulo)
+//        SimulacionGUI GUI = new SimulacionGUI(800,600,"Simulación");
+//        mostrarGUI(GUI);
         // Fin
-        Generador obj1 = new Generador();        
+        Generador obj1 = new Generador();  
+        Resultado R1 = new Resultado(522, 0, 2, 0, 47, 1000, 61);
 //        obj1.mostrar(obj1.cuadrado(580, 3, 10));
 //        obj1.mostrar(obj1.producto(420, 180, 3, 10));
 //        obj1.mostrar(obj1.productoVariado(382, 125, 3, 10));
 //        obj1.mostrar(obj1.multiplicativo(9, 11, 128, 10));
-        obj1.mostrar(obj1.mixto(522, 47, 61, 1000, 10));
-        
+//        obj1.mostrar(obj1.mixto(522, 47, 61, 1000, 10));
+        R1.tabla(5, 1);
     }
     
 }
