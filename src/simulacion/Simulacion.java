@@ -286,8 +286,8 @@ class Resultado extends Tablas {
         for (int i = 0; i < cantCamiones; i++) {
             t3[i][0] = i;
             t3[i][1] = t2[i][2];
-            t3[i][1] = tipoGenerador(g);
-            t3[i][2] = k.getKilogramos(t3[i][1]);
+            t3[i][2] = tipoGenerador(g);
+            t3[i][3] = k.getKilogramos(t3[i][2]);
         }
     }
     double tipoGenerador(int g) {
