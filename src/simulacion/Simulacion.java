@@ -199,18 +199,20 @@ class Tablas {
     class tipoCargas {
        char [] tcarga={'A','B','C'};
        double[] fx= {0.400,0.350,0.250};
-       double[] F= {0.400,0.,0.420,0.640,0.810,0.920,0.970,1.0};
+       double[] F= {0.400,0.750,1.0};
+       double[] V = {4000,3500,2500};
+       
  
         /** metodo que realiza el calculo del n° de camiones que llegan en un dia.
         * @param rn: Un numero pseudoaletorio
         * @return: N° de camiones que llegaron al dia
         */
-        char getTcarga(double rn){
+        int getTcarga(double rn){
            rn*=1000;
            for (int i = 0; i < F.length; i++) {
                 // se realiza el calculo del rango internamente
                 if (rn <= ((F[i]*1000)-1)){
-                    return tcarga[i];
+                    return i;
                 }
            }
            return '#'; // error
@@ -239,9 +241,12 @@ class Tablas {
 }
 // Clase para generar las tablas de resultado aplicando el metodo de montecarlos
 class Resultado extends Tablas {
-    int x0,k,n,x1,a,m,c;
-
-    Resultado(int x0, int k, int n, int x1, int a, int m, int c) {
+    int x0,k,n,x1,a,m,c,g;
+    double[][] t1;
+    double[][] t2;
+    double[][] t3;
+    
+    Resultado(int x0, int k, int n, int x1, int a, int m, int c, int g) {
         
         this.x0 = x0;
         this.k = k;
@@ -250,36 +255,42 @@ class Resultado extends Tablas {
         this.a = a;
         this.m = m;
         this.c = c;
+        this.g = g;
     }
     
-    public int tabla(int g, int t) {
+    void tablaCamiones(int cantDias) {
+        t1 = new double[cantDias][3];
+        numeroCamiones nc = new numeroCamiones();
         
-        int cant = 0;
-        double rn;
-        String[] tc = new String[n];
-        
-        for (int i = 0; i < n; i++) {
-            rn = generador(g);
-            cant += get(t,rn);
-        }
-        String n = nombreTablas(t);
-        System.out.println("Cantidad de " + n + ": " + cant);
-        return cant;
-    }
-    public String nombreTablas(int t) {
-        
-        switch (t) {
-            case 1:
-                return "Camiones";
-            case 2:
-                return "Tipo de Carga";
-            case 3:
-                return "Kilogramos";
-            default:
-                return "La tabla no existe";
+        for (int i = 0; i < cantDias; i++) {
+            t1[i][0] = i;
+            t1[i][1] = tipoGenerador(g);
+            t1[i][2] = nc.getCamiones(t1[i][1]);
         }
     }
-    public double generador(int g) {
+    void tablaTipoCarga(int cantCamiones) {
+        t2 = new double[cantCamiones][4];
+        tipoCargas tc = new tipoCargas();
+        
+        for (int i = 0; i < cantCamiones; i++) {
+            t2[i][0] = i;
+            t2[i][1] = tipoGenerador(g);
+            t2[i][2] = tc.getTcarga(t2[i][1]);
+            t2[i][3] = tc.V[(int) t2[i][2]];
+        }
+    }
+    void tablaKilogramos(int cantCamiones) {
+        t3 = new double[cantCamiones][4];
+        kilogramos k = new kilogramos();
+        
+        for (int i = 0; i < cantCamiones; i++) {
+            t3[i][0] = i;
+            t3[i][1] = t2[i][2];
+            t3[i][1] = tipoGenerador(g);
+            t3[i][2] = k.getKilogramos(t3[i][1]);
+        }
+    }
+    double tipoGenerador(int g) {
         double [][] r;
         Generador obj1 = new Generador();
         
@@ -308,21 +319,26 @@ class Resultado extends Tablas {
                 return -1.0;
         }
     }
-    public int get(int t, double rn) {
+    int cantidadCamiones(double[][] t) {
+        int v = 0;
         
-        switch (t) {
-            case 1:
-                numeroCamiones cm = new numeroCamiones();   
-                return cm.getCamiones(rn);
-            case 2:
-                tipoCargas ca = new tipoCargas();
-                return ca.getTcarga(rn);
-            case 3:
-                kilogramos k = new kilogramos();
-                return k.getKilogramos(rn);
-            default:
-                return -1;
+        for (int i = 0; i < t.length; i++) {
+            v += (int)t[i][2];
         }
+        return v;
+    }
+    
+    void simulacion(int cantDias) {
+        int cantC;
+        
+        tablaCamiones(cantDias);
+        cantC = cantidadCamiones(t1);
+        tablaTipoCarga(cantC);
+        tablaKilogramos(cantC);
+        Generador m = new Generador();
+        m.mostrar(t1);
+        m.mostrar(t2);
+        m.mostrar(t3);
     }
 }
 
@@ -362,21 +378,19 @@ public class Simulacion {
     */
     public static void main(String[] args) {
         
-        // Interfaz grafica
-        configStyleGUI("Windows"); //Estilo o Diseño
-        // Orden de los parametros de la ventana: (ancho,altura,titulo)
-        SimulacionGUI GUI = new SimulacionGUI(800,600,"Simulación");
-        mostrarGUI(GUI);
+//        // Interfaz grafica
+//        configStyleGUI("Windows"); //Estilo o Diseño
+//        // Orden de los parametros de la ventana: (ancho,altura,titulo)
+//        SimulacionGUI GUI = new SimulacionGUI(800,600,"Simulación");
+//        mostrarGUI(GUI);
         // Fin
         Generador obj1 = new Generador();        
-        Resultado R1 = new Resultado(522, 0, 2, 0, 47, 1000, 61);
+        Resultado R1 = new Resultado(21, 0, 0, 0, 17, 1000, 23, 5);
+        R1.simulacion(8);
 //        obj1.mostrar(obj1.cuadrado(580, 3, 10));
 //        obj1.mostrar(obj1.producto(420, 180, 3, 10));
 //        obj1.mostrar(obj1.productoVariado(382, 125, 3, 10));
 //        obj1.mostrar(obj1.multiplicativo(9, 11, 128, 10));
-//        obj1.mostrar(obj1.mixto(522, 47, 61, 1000, 10));
-        R1.tabla(5, 1);
-//        R1.tabla(5, 2);
-        R1.tabla(5, 3);
+//        obj1.mostrar(obj1.mixto(21, 17, 23, 1000, 60));
     }
 }
