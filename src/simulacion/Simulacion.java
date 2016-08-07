@@ -5,6 +5,8 @@
  */
 package simulacion;
 
+import java.util.Formatter;
+
 /**
  *
  * @authores Joseph Perez, Gabriel Rodriguez
@@ -179,6 +181,8 @@ class Tablas {
            return null;
        };
     
+}
+    
     class numeroCamiones extends Tablas{
        double[] fx= {0.050,0.150,0.220,0.220,0.170,0.110,0.050,0.030};
        double[] F= {0.050,0.200,0.420,0.640,0.810,0.920,0.970,1.0};
@@ -239,7 +243,7 @@ class Tablas {
            return -1; // error
        };
     }
-}
+
 
 class Resultado {
     int x0,k,n,x1,a,m,c;
