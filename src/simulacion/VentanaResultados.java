@@ -13,6 +13,19 @@ import javax.swing.JPanel;
  * @author Rodriguez
  */
 public class VentanaResultados extends javax.swing.JFrame {
+    private String diassimulacion;
+    private String camionestotales;
+    private String camionesA;
+    private String camionesB;
+    private String camionesC;
+    private String horaset;
+    private String horaset1;
+    private String horaset2;
+    private String horaset3;
+    private String pagosc1;
+    private String pagosc2;
+    private String pagosc3;
+    private String pagost;
 
    
     // metodo que renderiza la vista luego de agregar o eliminar un elemento a la ventana.
@@ -42,6 +55,8 @@ public class VentanaResultados extends javax.swing.JFrame {
     Object[][] t1;
     Object[][] t2;
     Object[][] t3;
+    Object[][] t4;
+    Object[][] t5;
     int ctc;
     public VentanaResultados(Resultado R1) {
         
@@ -94,7 +109,33 @@ public class VentanaResultados extends javax.swing.JFrame {
             }
             this.t3[i]= new Object[]{(int)R1.t3[i][0],(int)R1.t3[i][1],tipo,R1.t3[i][3],(int)R1.t3[i][4]};
         }
-
+        
+        this.t4= new Object[R1.t4.length][R1.t4[0].length];
+        for (int i = 0; i < R1.t4.length; i++) {    
+            Double tc = R1.t4[i][2];
+            String tipo="-";
+            int ncamion = new Double(R1.t3[i][1]).intValue();
+            switch(tc.intValue()){
+                case 0:{
+                  tipo="A"; 
+                  break;
+                }
+                case 1:{
+                  tipo="B"; 
+                  break;  
+                }
+                case 2:{
+                  tipo="C"; 
+                  break;  
+                }
+            }
+            this.t4[i]= new Object[]{(int)R1.t4[i][0],(int)R1.t4[i][1],ncamion,tipo,(int)R1.t4[i][3],(int)R1.t4[i][4],R1.t4[i][5],(int)R1.t4[i][6]};
+        }
+        
+//        this.t5= new Object[R1.t5.length][R1.t5[0].length];
+//        for (int i = 0; i < R1.t5.length; i++) {    
+//            this.t5[i]= new Object[]{(int)R1.t5[i][0],(int)R1.t5[i][1],R1.t5[i][2],R1.t5[i][3],R1.t5[i][4],(int)R1.t5[i][5]};
+//        }
         initComponents();
         
     }
@@ -103,12 +144,38 @@ public class VentanaResultados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        VistaResultado3 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        atras4 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        siguiente5 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jLabel18 = new javax.swing.JLabel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
+        jLabel19 = new javax.swing.JLabel();
+        VistaResultado2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        atras3 = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTable8 = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        siguiente4 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTable9 = new javax.swing.JTable();
         VistaResultado1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         cantidadtotalcamiones = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable6 = new javax.swing.JTable();
-        siguiente2 = new javax.swing.JButton();
+        atras2 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
@@ -132,7 +199,163 @@ public class VentanaResultados extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         siguiente1 = new javax.swing.JButton();
 
-        VistaResultado1.setMaximumSize(null);
+        VistaResultado3.setMinimumSize(new java.awt.Dimension(800, 700));
+        VistaResultado3.setPreferredSize(new java.awt.Dimension(800, 700));
+        VistaResultado3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
+        jLabel11.setText("Resultados - Respuestas");
+        VistaResultado3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        atras4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        atras4.setText("Atras");
+        atras4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atras4ActionPerformed(evt);
+            }
+        });
+        VistaResultado3.add(atras4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 590, 130, -1));
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel14.setText("3. ¿Cuantas horas extras totales fueron trabajadas por las cuadrillas en el experimento?");
+        VistaResultado3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 880, -1));
+
+        siguiente5.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        siguiente5.setText("Finalizar");
+        siguiente5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siguiente5ActionPerformed(evt);
+            }
+        });
+        VistaResultado3.add(siguiente5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 590, 130, -1));
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel16.setText("R:");
+        VistaResultado3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 30, -1));
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel15.setText("2. ¿Cuantas horas extras totales fueron trabajadas por las cuadrillas en el experimento?");
+        VistaResultado3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 880, -1));
+
+        jTextArea2.setEditable(false);
+        jTextArea2.setBackground(new java.awt.Color(240, 240, 240));
+        jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTextArea2.setLineWrap(true);
+        jTextArea2.setRows(5);
+        jTextArea2.setText("En los ("+diassimulacion+") dias de simulación llegaron al terminal ("+camionestotales+") camiones: ("+camionesA+") de tipo A, ("+camionesB+") de Tipo B y ("+camionesC+") de tipo C");
+        jTextArea2.setWrapStyleWord(true);
+        jScrollPane10.setViewportView(jTextArea2);
+
+        VistaResultado3.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 600, 90));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel17.setText("1. ¿Que cantidad de camiones por tipo de carga llegaron a la terminal en los dias de simulación?");
+        VistaResultado3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 880, -1));
+
+        jTextArea3.setEditable(false);
+        jTextArea3.setBackground(new java.awt.Color(240, 240, 240));
+        jTextArea3.setColumns(20);
+        jTextArea3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTextArea3.setLineWrap(true);
+        jTextArea3.setRows(5);
+        jTextArea3.setText("En los ("+diassimulacion+") dias de simulación se trabajaron ("+horaset+") horas extras totales. La cuadrilla 1 trabajo ("+horaset1+") horas extras, la cuadrilla 2 trabajo ("+horaset2+") horas extras y la cuadrilla 3 trabajo ("+horaset3+") horas extras. ");
+        jTextArea3.setWrapStyleWord(true);
+        jScrollPane11.setViewportView(jTextArea3);
+
+        VistaResultado3.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 600, 90));
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel18.setText("R:");
+        VistaResultado3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 30, -1));
+
+        jTextArea4.setEditable(false);
+        jTextArea4.setBackground(new java.awt.Color(240, 240, 240));
+        jTextArea4.setColumns(20);
+        jTextArea4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTextArea4.setLineWrap(true);
+        jTextArea4.setRows(5);
+        jTextArea4.setText("En los ("+diassimulacion+") dias de simulación se genero un costo por pago a la cuadrilla 1 de ("+pagosc1+") bs, a la cuadrilla 2 ("+pagosc2+") bs y a la cuadrilla 3 de ("+pagosc3+") bs. Para un total de ("+pagost+") bs a cancelar por lo la empresa.");
+        jTextArea4.setWrapStyleWord(true);
+        jScrollPane12.setViewportView(jTextArea4);
+
+        VistaResultado3.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 600, 90));
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel19.setText("R:");
+        VistaResultado3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 30, -1));
+
+        VistaResultado2.setMinimumSize(new java.awt.Dimension(800, 700));
+        VistaResultado2.setPreferredSize(new java.awt.Dimension(800, 700));
+        VistaResultado2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
+        jLabel7.setText("Resultados");
+        VistaResultado2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        atras3.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        atras3.setText("Atras");
+        atras3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atras3ActionPerformed(evt);
+            }
+        });
+        VistaResultado2.add(atras3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 590, 130, -1));
+
+        jTable8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTable8.setModel(new javax.swing.table.DefaultTableModel(t4
+            ,
+            new String [] {
+                "Dia", "Dia de Descarga", "N° Camion/Dia", "Tipo de Carga", "Velocidad", "Kilogramos", "Horas/Descargas", "Cuadrilla"
+            }
+        ));
+        jScrollPane7.setViewportView(jTable8);
+
+        VistaResultado2.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 740, 220));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel12.setText("Tabla #7 resultados");
+        VistaResultado2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 160, -1));
+
+        siguiente4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        siguiente4.setText("Siguiente");
+        siguiente4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siguiente4ActionPerformed(evt);
+            }
+        });
+        VistaResultado2.add(siguiente4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 590, 130, -1));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel13.setText("Tabla #8 resultados");
+        VistaResultado2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 160, -1));
+
+        jTable9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTable9.setModel(new javax.swing.table.DefaultTableModel(
+            t5,
+            new String [] {
+                "Dia Descarga", "Cuadrilla", "Horas Totales", "Bs x H", "horas Extras", "Bs x H.extras"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane9.setViewportView(jTable9);
+
+        VistaResultado2.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 740, 220));
+
         VistaResultado1.setMinimumSize(new java.awt.Dimension(800, 700));
         VistaResultado1.setPreferredSize(new java.awt.Dimension(800, 700));
         VistaResultado1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -173,9 +396,14 @@ public class VentanaResultados extends javax.swing.JFrame {
 
         VistaResultado1.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 220, 240));
 
-        siguiente2.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        siguiente2.setText("Atras");
-        VistaResultado1.add(siguiente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 540, 130, -1));
+        atras2.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        atras2.setText("Atras");
+        atras2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atras2ActionPerformed(evt);
+            }
+        });
+        VistaResultado1.add(atras2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 540, 130, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel8.setText("Tabla #6 resultados");
@@ -241,11 +469,15 @@ public class VentanaResultados extends javax.swing.JFrame {
 
         siguiente3.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         siguiente3.setText("Siguiente");
+        siguiente3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siguiente3ActionPerformed(evt);
+            }
+        });
         VistaResultado1.add(siguiente3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 590, 130, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        VistaEnunciado.setMaximumSize(null);
         VistaEnunciado.setMinimumSize(new java.awt.Dimension(800, 700));
         VistaEnunciado.setPreferredSize(new java.awt.Dimension(800, 700));
         VistaEnunciado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -402,37 +634,102 @@ public class VentanaResultados extends javax.swing.JFrame {
         
     }//GEN-LAST:event_siguiente1ActionPerformed
 
+    private void atras2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atras2ActionPerformed
+       System.out.println("Principal");           
+       removeComponent(VistaResultado1);
+       addComponent(VistaEnunciado, "Center", "Enunciado");
+       updateView();
+    }//GEN-LAST:event_atras2ActionPerformed
+
+    private void atras3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atras3ActionPerformed
+       System.out.println("Principal");           
+       removeComponent(VistaResultado2);
+       addComponent(VistaResultado1, "Center", "Resultados 1");
+       updateView();
+    }//GEN-LAST:event_atras3ActionPerformed
+
+    private void siguiente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguiente3ActionPerformed
+       System.out.println("Principal");           
+       removeComponent(VistaResultado1);
+       addComponent(VistaResultado2, "Center", "Resultados 2");
+       updateView();
+    }//GEN-LAST:event_siguiente3ActionPerformed
+
+    private void atras4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atras4ActionPerformed
+       System.out.println("Principal");           
+       removeComponent(VistaResultado3);
+       addComponent(VistaResultado2, "Center", "Resultados 2");
+       updateView();
+    }//GEN-LAST:event_atras4ActionPerformed
+
+    private void siguiente5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguiente5ActionPerformed
+            setVisible(false);
+    }//GEN-LAST:event_siguiente5ActionPerformed
+
+    private void siguiente4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguiente4ActionPerformed
+       System.out.println("Principal");           
+       removeComponent(VistaResultado2);
+       addComponent(VistaResultado3, "Center", "Resultados 3");
+       updateView();
+    }//GEN-LAST:event_siguiente4ActionPerformed
+
 
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel VistaEnunciado;
     private javax.swing.JPanel VistaResultado1;
+    private javax.swing.JPanel VistaResultado2;
+    private javax.swing.JPanel VistaResultado3;
+    private javax.swing.JButton atras2;
+    private javax.swing.JButton atras3;
+    private javax.swing.JButton atras4;
     private javax.swing.JLabel cantidadtotalcamiones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
+    private javax.swing.JTable jTable8;
+    private javax.swing.JTable jTable9;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
     private javax.swing.JButton siguiente1;
-    private javax.swing.JButton siguiente2;
     private javax.swing.JButton siguiente3;
+    private javax.swing.JButton siguiente4;
+    private javax.swing.JButton siguiente5;
     // End of variables declaration//GEN-END:variables
 }
