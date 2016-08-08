@@ -138,13 +138,23 @@ public class SimulacionGUI extends JFrame {
         text2p1.setText("Seleccione el Numeros de Dias de Simulacion:");
         VistaProyecto1.add(text2p1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 370, 30));
 
+        /* Cuadrado Medio Vista Inicial
+        formK.setVisible(true);
+        formXo.setVisible(true);
+        formA.setVisible(false);
+        formC.setVisible(false);
+        formM.setVisible(false);*/
+        
+
+        
+           
         cboxmetodop1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        cboxmetodop1.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Cuadrado Medio", "Producto Medio", "Producto Medio Variado", "Congruencial Mixto", "Congruencial Multiplicativo"}));
+        cboxmetodop1.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Cuadrado Medio", "Producto Medio", "Producto Medio Variado","Congruencial Multiplicativo", "Congruencial Mixto"}));
         cboxmetodop1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 System.out.println(cboxmetodop1.getSelectedIndex());
                 switch (cboxmetodop1.getSelectedIndex()) {
-                    case 0: {//Cuadrado Medio
+                    case 0: {//Cuadrado Medio                   
                         formK.setVisible(true);
                         formXo.setVisible(true);
                         formA.setVisible(false);
@@ -201,7 +211,7 @@ public class SimulacionGUI extends JFrame {
         VistaProyecto1.add(titlep1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 510, 60));
 
         spinnerdiasp1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        spinnerdiasp1.setModel(new javax.swing.SpinnerNumberModel(10, 1, 30, 1));
+        spinnerdiasp1.setModel(new javax.swing.SpinnerNumberModel(8, 1, 30, 1));
         spinnerdiasp1.setEditor(new javax.swing.JSpinner.NumberEditor(spinnerdiasp1, ""));
         VistaProyecto1.add(spinnerdiasp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 270, 130, 30));
 
@@ -223,6 +233,22 @@ public class SimulacionGUI extends JFrame {
         btnsimularp1.setText("Simular");
         btnsimularp1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                
+
+                
+                int x0 =(int) formXoSp.getValue();
+                int k = (int)formKsp.getValue();
+                int n = (int) spinnerdiasp1.getValue();
+                int x1= (int) formAsp.getValue();
+                int a = (int) formAsp.getValue();
+                int m = (int) formMsp.getValue();
+                int c = (int) formCsp.getValue();
+                int g = (int) cboxmetodop1.getSelectedIndex();
+                
+                Resultado R1 = new Resultado(x0, k, n, x1, a, m, c, g);
+                R1.simulacion(n);
+                new VentanaResultados(R1).setVisible(true);
                 
             }
         });
@@ -250,6 +276,14 @@ public class SimulacionGUI extends JFrame {
         formKsp.setMaximumSize(new java.awt.Dimension(45, 32));
         formKsp.setMinimumSize(new java.awt.Dimension(45, 32));
         formKsp.setPreferredSize(new java.awt.Dimension(45, 32));
+        formKsp.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                int lim = ((int) Math.pow(10,(int) formKsp.getValue()));
+                System.out.println("lim "+ lim);
+                formXoSp.setModel(new javax.swing.SpinnerNumberModel(lim-1, 0,lim-1, 1));
+                formAsp.setModel(new javax.swing.SpinnerNumberModel(lim-1, 0,lim-1, 1));
+            }
+        });
         formK.add(formKsp);
 
         VistaProyecto1.add(formK, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 70, 30));
@@ -312,6 +346,23 @@ public class SimulacionGUI extends JFrame {
         formM.add(formMsp);
 
         VistaProyecto1.add(formM, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, 100, 30));
+        
+        // Mixto Vista Inicial
+        formK.setVisible(true);
+        formXo.setVisible(true);
+        formA.setVisible(true);
+        formC.setVisible(true);
+        formAtext.setText("a: ");
+        formM.setVisible(true);
+        
+  
+         // Valores de prueba eliminar al terminar
+         formXoSp.setModel(new javax.swing.SpinnerNumberModel(21, 0, 999, 1));
+         spinnerdiasp1.setModel(new javax.swing.SpinnerNumberModel(8, 1, 30, 1));
+         formAsp.setModel(new javax.swing.SpinnerNumberModel(17, 0, 999, 1));
+         formCsp.setModel(new javax.swing.SpinnerNumberModel(23, 0, 999, 1));
+         cboxmetodop1.setSelectedIndex(5-1);
+        
     }
 
     JPanel VistaMetodos1;
@@ -437,6 +488,7 @@ public class SimulacionGUI extends JFrame {
         btngenerarp1.setText("Generar");
         btngenerarp1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
                 int k = (int)formKsp.getValue();
                 double xo = Double.valueOf(String.valueOf(formXosp.getValue()));
                 int a = (int) formAsp.getValue();
