@@ -131,11 +131,27 @@ public class VentanaResultados extends javax.swing.JFrame {
             }
             this.t4[i]= new Object[]{(int)R1.t4[i][0],(int)R1.t4[i][1],ncamion,tipo,(int)R1.t4[i][3],(int)R1.t4[i][4],R1.t4[i][5],(int)R1.t4[i][6]};
         }
+         this.t5= new Object[R1.t5.length][R1.t5[0].length];
+        for (int i = 0; i < R1.t5.length; i++) {    
+            this.t5[i]= new Object[]{(int)R1.t5[i][0],(int)R1.t5[i][1],R1.t5[i][2],R1.t5[i][3],R1.t5[i][4],(int)R1.t5[i][5]};
+        }
         
-//        this.t5= new Object[R1.t5.length][R1.t5[0].length];
-//        for (int i = 0; i < R1.t5.length; i++) {    
-//            this.t5[i]= new Object[]{(int)R1.t5[i][0],(int)R1.t5[i][1],R1.t5[i][2],R1.t5[i][3],R1.t5[i][4],(int)R1.t5[i][5]};
-//        }
+        diassimulacion = String.valueOf(R1.n);
+        camionestotales = String.valueOf(R1.t2.length);
+        int[] y = R1.tipoCamiones();
+        camionesA = String.valueOf(y[0]);
+        camionesB = String.valueOf(y[1]);
+        camionesC = String.valueOf(y[2]);
+        double[] q = R1.horasExtrasCuadrillas();
+        horaset = String.valueOf(q[0] + q[1] + q[2]);
+        horaset1 = String.valueOf(q[0]);
+        horaset2 = String.valueOf(q[1]);
+        horaset3 = String.valueOf(q[2]);
+        double[] e = R1.bsCuadrillas();
+        pagosc1 = String.valueOf(e[0]);
+        pagosc2 = String.valueOf(e[1]);
+        pagosc3 = String.valueOf(e[2]);
+        pagost = String.valueOf(e[0]+e[1]+e[2]);
         initComponents();
         
     }
@@ -172,7 +188,6 @@ public class VentanaResultados extends javax.swing.JFrame {
         jTable9 = new javax.swing.JTable();
         VistaResultado1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        cantidadtotalcamiones = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable6 = new javax.swing.JTable();
         atras2 = new javax.swing.JButton();
@@ -186,8 +201,6 @@ public class VentanaResultados extends javax.swing.JFrame {
         siguiente3 = new javax.swing.JButton();
         VistaEnunciado = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -300,7 +313,7 @@ public class VentanaResultados extends javax.swing.JFrame {
                 atras3ActionPerformed(evt);
             }
         });
-        VistaResultado2.add(atras3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 590, 130, -1));
+        VistaResultado2.add(atras3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 590, 130, -1));
 
         jTable8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable8.setModel(new javax.swing.table.DefaultTableModel(t4
@@ -311,11 +324,11 @@ public class VentanaResultados extends javax.swing.JFrame {
         ));
         jScrollPane7.setViewportView(jTable8);
 
-        VistaResultado2.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 740, 220));
+        VistaResultado2.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 640, 220));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel12.setText("Tabla #7 resultados");
-        VistaResultado2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 160, -1));
+        VistaResultado2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 180, -1));
 
         siguiente4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         siguiente4.setText("Siguiente");
@@ -324,11 +337,11 @@ public class VentanaResultados extends javax.swing.JFrame {
                 siguiente4ActionPerformed(evt);
             }
         });
-        VistaResultado2.add(siguiente4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 590, 130, -1));
+        VistaResultado2.add(siguiente4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 590, 130, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel13.setText("Tabla #8 resultados");
-        VistaResultado2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 160, -1));
+        VistaResultado2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 190, -1));
 
         jTable9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable9.setModel(new javax.swing.table.DefaultTableModel(
@@ -354,7 +367,7 @@ public class VentanaResultados extends javax.swing.JFrame {
         });
         jScrollPane9.setViewportView(jTable9);
 
-        VistaResultado2.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 740, 220));
+        VistaResultado2.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 640, 220));
 
         VistaResultado1.setMinimumSize(new java.awt.Dimension(800, 700));
         VistaResultado1.setPreferredSize(new java.awt.Dimension(800, 700));
@@ -363,12 +376,6 @@ public class VentanaResultados extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         jLabel6.setText("Resultados");
         VistaResultado1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-
-        cantidadtotalcamiones.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        cantidadtotalcamiones.setText(ctc +" Camiones en total"
-        );
-        cantidadtotalcamiones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        VistaResultado1.add(cantidadtotalcamiones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 220, 20));
 
         jTable6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable6.setModel(new javax.swing.table.DefaultTableModel(t1
@@ -394,7 +401,7 @@ public class VentanaResultados extends javax.swing.JFrame {
         });
         jScrollPane8.setViewportView(jTable6);
 
-        VistaResultado1.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 220, 240));
+        VistaResultado1.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 220, 210));
 
         atras2.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         atras2.setText("Atras");
@@ -403,11 +410,11 @@ public class VentanaResultados extends javax.swing.JFrame {
                 atras2ActionPerformed(evt);
             }
         });
-        VistaResultado1.add(atras2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 540, 130, -1));
+        VistaResultado1.add(atras2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 600, 130, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel8.setText("Tabla #6 resultados");
-        VistaResultado1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, -1, 30));
+        VistaResultado1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, -1, 30));
 
         jTable4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable4.setModel(new javax.swing.table.DefaultTableModel(t3,
@@ -432,7 +439,7 @@ public class VentanaResultados extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(jTable4);
 
-        VistaResultado1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 510, 240));
+        VistaResultado1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 660, 230));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel9.setText("Tabla #4 resultados");
@@ -461,7 +468,7 @@ public class VentanaResultados extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(jTable5);
 
-        VistaResultado1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 510, 240));
+        VistaResultado1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 510, 210));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel10.setText("Tabla #5 resultados");
@@ -474,7 +481,7 @@ public class VentanaResultados extends javax.swing.JFrame {
                 siguiente3ActionPerformed(evt);
             }
         });
-        VistaResultado1.add(siguiente3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 590, 130, -1));
+        VistaResultado1.add(siguiente3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 600, 130, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -486,20 +493,9 @@ public class VentanaResultados extends javax.swing.JFrame {
         jLabel3.setText("Enunciado");
         VistaEnunciado.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane4.setHorizontalScrollBar(null);
-
-        jTextArea1.setColumns(1);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Los Camiones llegan en forma aleatoria al terminal para descagar. Despues de analizar los datos historicos, se concluyo que porcentaje de llegadas diarias sigue una distribucion de poisson con una media de 3 camiones por dias, ver tabla #1. El peso (Kg) de la carga es un factor decarga es un factor importante en referete al tiempo de descarga. Los registrso pasados muestran que los pesos de la carga(independiente del tipo) estan distribuidos como lo indica la tabla #2. La cantidad de kilogramos por hora que una cuadrilla puede descargar tambien varia y es una funcion del tipo de carga. La probabilidad de cada tipo de  carga y la velocidad de descarga para cada uno de estos se muestran en la tabla #3 la compañia posee 3 cuadrilla en donde c/u consta de 3 personas, un operador de elevador de carga, aquien se le paga Bs. 3000,00 la hora y dos obreros a quien se les paga a c/u Bs. 1800,00 la hora. La politica de la compañia es descargar los camiones un dia despues de su llegada y terminar toda descarga iniciada del los camiones sin importar los costos de tiempo extra. El contrato de sindicato demanda una bonificacion del 50% del valor de la hora por cada hora que exceda de las 8 trabajadas en el dia.");
-        jScrollPane4.setViewportView(jTextArea1);
-
-        VistaEnunciado.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 340, 560));
-
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel4.setText("Tabla #1");
-        VistaEnunciado.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, -1));
+        VistaEnunciado.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, -1));
 
         jTable2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -534,11 +530,11 @@ public class VentanaResultados extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        VistaEnunciado.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 380, 160));
+        VistaEnunciado.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 380, 160));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel5.setText("Tabla #2");
-        VistaEnunciado.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, -1, -1));
+        VistaEnunciado.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, -1, -1));
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -572,11 +568,11 @@ public class VentanaResultados extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        VistaEnunciado.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 380, 140));
+        VistaEnunciado.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 380, 140));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel1.setText("Tabla #3");
-        VistaEnunciado.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, -1, -1));
+        VistaEnunciado.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 470, -1, -1));
 
         jTable3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
@@ -606,7 +602,7 @@ public class VentanaResultados extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable3);
 
-        VistaEnunciado.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 500, 380, 80));
+        VistaEnunciado.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 500, 380, 80));
 
         siguiente1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         siguiente1.setText("Siguiente");
@@ -615,7 +611,7 @@ public class VentanaResultados extends javax.swing.JFrame {
                 siguiente1ActionPerformed(evt);
             }
         });
-        VistaEnunciado.add(siguiente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 610, 130, -1));
+        VistaEnunciado.add(siguiente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 600, 130, -1));
 
         getContentPane().add(VistaEnunciado, java.awt.BorderLayout.CENTER);
 
@@ -684,7 +680,6 @@ public class VentanaResultados extends javax.swing.JFrame {
     private javax.swing.JButton atras2;
     private javax.swing.JButton atras3;
     private javax.swing.JButton atras4;
-    private javax.swing.JLabel cantidadtotalcamiones;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -709,7 +704,6 @@ public class VentanaResultados extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
@@ -723,7 +717,6 @@ public class VentanaResultados extends javax.swing.JFrame {
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable8;
     private javax.swing.JTable jTable9;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;

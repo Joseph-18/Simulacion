@@ -436,6 +436,54 @@ class Resultado extends Tablas {
         }
         return v;
     }
+    int[] tipoCamiones() {
+        int[] tipo = new int[3];
+        
+        for (int i = 0; i < t2.length; i++) {
+            if (t2[i][3] == 0) {
+                tipo[0] += 1;
+            } else {
+                if (t2[i][3] == 1) {
+                    tipo[1] += 1;
+                } else {
+                    tipo[2] += 1;
+                }
+            }
+        }
+        return tipo;
+    }
+    double[] horasExtrasCuadrillas() {
+        double[] cuadrillas = new double[3];
+        
+        for (int i = 0; i < t5.length; i++) {
+            if (t5[i][1] == 1) {
+                cuadrillas[0] += t5[i][4];
+            } else {
+                if (t5[i][1] == 2) {
+                    cuadrillas[1] += t5[i][4];
+                } else {
+                    cuadrillas[2] += t5[i][4];
+                }
+            }
+        }
+        return cuadrillas;
+    }
+    double[] bsCuadrillas() {
+        double[] cuadrillas = new double[3];
+        
+        for (int i = 0; i < t5.length; i++) {
+            if (t5[i][1] == 1) {
+                cuadrillas[0] += t5[i][3] + t5[i][5];
+            } else {
+                if (t5[i][1] == 2) {
+                    cuadrillas[1] += t5[i][3] + t5[i][5];
+                } else {
+                    cuadrillas[2] += t5[i][3] + t5[i][5];
+                }
+            }
+        }
+        return cuadrillas;
+    }
     void simulacion(int cantDias) {
         int cantC;
         
@@ -445,6 +493,10 @@ class Resultado extends Tablas {
         tablaKilogramos(cantC,cantDias);
         tablaCuadrilla(cantC,cantDias);
         tablaCuadrillaHora(cantC,cantDias);
+        int[] y = tipoCamiones();
+        System.out.println("Tipo : "+ y[0] + " "+ y[1]+" "+ y[2]);
+        double[] q = horasExtrasCuadrillas();
+        System.out.println("");
     }
 }
 
