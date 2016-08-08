@@ -13,7 +13,7 @@ import javax.swing.JScrollPane;
 
 /**
  *
- * @author Rodriguez
+ * @author Joseph Pérez, Gabriel Rodríguez, Jesús Salazar
  */
 public class VentanaMetodos extends javax.swing.JFrame {
     

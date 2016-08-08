@@ -331,36 +331,73 @@ class Resultado extends Tablas {
     }
     void tablaCuadrillaHora(int cantCamiones, int cantDias) {
         t5 = new double[cantCamiones][6];
-        double c1 = 0,c2 = 0,c3 = 0;
         int k = 0;
+        double c1 = 0, c2 = 0, c3 = 0;
         
         for (int j = 0; j < cantDias; j++) {
             for (int i = 0; i < t1[j][2]; i++) {
-                t4[k][0] = j+1;
-                t4[k][1] = j+2;
-                t4[k][2] = t2[k][3];
-                t4[k][3] = t2[k][4];
-                t4[k][4] = t3[k][4];
-                t4[k][5] = t4[k][4]/t4[k][3];
-                if (c1 <= c2 && c1 <= c3) {
-                    c1 = t4[k][5];
-                    t4[k][6] = 1;
+                t5[k][0] = j+2;
+                t5[k][1] = t4[k][6];
+                t5[k][2] = t4[k][5];
+                if (t5[k][1] == 1) {
+                    c1 += t5[k][2];
                 } else {
-                    if (c2 <= c1 && c2 <= c3) {
-                        c2 = t4[k][5];
-                        t4[k][6] = 2;
+                    if (t5[k][1] == 2) {
+                        c2 += t5[k][2];
                     } else {
-                        c3 = t4[k][5];
-                        t4[k][6] = 3;
+                        c3 += t5[k][2];
                     }
                 }
                 k += 1;
             }
-            c1 = 0;
-            c2 = 0;
-            c3 = 0;
-        }
-        
+            int w = k-(int)t1[j][2];
+            for (int i = 0; i < t1[j][2]; i++) {
+                if (t5[w][1] == 1 && c1 <= 8) {
+                    t5[w][3] = c1 * 6600;
+                    t5[w][4] = 0;
+                    t5[w][5] = 0;
+                    c1 = 0;
+                } else {
+                    if (c1 > 8) {
+                        t5[w][3] = 8 * 6600;
+                        t5[w][4] = c1 - 8;
+                        t5[w][5] = t5[w][4] * 9900;
+                        c1 = 0;
+                    }else{
+                    
+                        if (t5[w][1] == 2 && c2 <= 8) {
+                            t5[w][3] = c2 * 6600;
+                            t5[w][4] = 0;
+                            t5[w][5] = 0;
+                            c2 = 0;
+                        } else {
+                            if (c2 > 8) {
+                                t5[w][3] = 8 * 6600;
+                                t5[w][4] = c2 - 8;
+                                t5[w][5] = t5[w][4] * 9900;
+                                c2 = 0;
+                            }else{
+                                if (t5[w][1] == 3 && c3 <= 8) {
+                                    t5[w][3] = c3 * 6600;
+                                    t5[w][4] = 0;
+                                    t5[w][5] = 0;
+                                    c3 = 0;
+                                } else {
+                                    t5[w][3] = 8 * 6600;
+                                    t5[w][4] = c3 - 8;
+                                    t5[w][5] = t5[w][4] * 9900;
+                                    c3 = 0;
+                                }
+                            }    
+                        }
+                    }    
+                }
+//                if (c2 == 0 || c3 == 0) {
+//                    i = (int) t1[j][2];
+//                }
+                w += 1;
+            }
+        } 
     }
     double tipoGenerador(int g) {
         double [][] r;
@@ -407,6 +444,7 @@ class Resultado extends Tablas {
         tablaTipoCarga(cantC,cantDias);
         tablaKilogramos(cantC,cantDias);
         tablaCuadrilla(cantC,cantDias);
+        tablaCuadrillaHora(cantC,cantDias);
     }
 }
 

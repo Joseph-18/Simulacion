@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 
 /**
- * @author Gabriel Rodriguez
+ * @authores Joseph Pérez, Gabriel Rodríguez, Jesús Salazar
  */
 public class SimulacionGUI extends JFrame {
 
