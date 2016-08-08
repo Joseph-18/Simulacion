@@ -242,9 +242,7 @@ class Tablas {
 // Clase para generar las tablas de resultado aplicando el metodo de montecarlos
 class Resultado extends Tablas {
     int x0,k,n,x1,a,m,c,g;
-    double[][] t1;
-    double[][] t2;
-    double[][] t3;
+    double[][] t1,t2,t3,t4,t5;
     
     Resultado(int x0, int k, int n, int x1, int a, int m, int c, int g) {
         
@@ -268,28 +266,70 @@ class Resultado extends Tablas {
             t1[i][2] = nc.getCamiones(t1[i][1]);
         }
     }
-    void tablaTipoCarga(int cantCamiones) {
-        t2 = new double[cantCamiones][4];
+    void tablaTipoCarga(int cantCamiones, int cantDias) {
+        t2 = new double[cantCamiones][5];
         tipoCargas tc = new tipoCargas();
-        
-        for (int i = 0; i < cantCamiones; i++) {
-            t2[i][0] = i;
-            t2[i][1] = tipoGenerador(g);
-            t2[i][2] = tc.getTcarga(t2[i][1]);
-            t2[i][3] = tc.V[(int) t2[i][2]];
+        int k = 0;
+        for (int j = 0; j < cantDias; j++) {
+            for (int i = 0; i < t1[j][2]; i++) {
+                t2[k][0] = j+1;
+                t2[k][1] = i+1;
+                t2[k][2] = tipoGenerador(g);
+                t2[k][3] = tc.getTcarga(t2[k][2]);
+                t2[k][4] = tc.V[(int) t2[k][3]];
+                k +=1;
+            }
         }
     }
-    void tablaKilogramos(int cantCamiones) {
-        t3 = new double[cantCamiones][4];
-        kilogramos k = new kilogramos();
+    void tablaKilogramos(int cantCamiones, int cantDias) {
+        t3 = new double[cantCamiones][5];
+        kilogramos k1 = new kilogramos();
+        int k = 0;
         
-        for (int i = 0; i < cantCamiones; i++) {
-            t3[i][0] = i;
-            t3[i][1] = t2[i][2];
-            t3[i][2] = tipoGenerador(g);
-            t3[i][3] = k.getKilogramos(t3[i][2]);
+        for (int j = 0; j < cantDias; j++) {
+            for (int i = 0; i < t1[j][2]; i++) {
+                t3[k][0] = j+1;
+                t3[k][1] = i+1;
+                t3[k][2] = t2[k][3];
+                t3[k][3] = tipoGenerador(g);
+                t3[k][4] = k1.getKilogramos(t3[k][2]);
+                k += 1;
+            }
         }
     }
+    void tablaCuadrilla(int cantCamiones, int cantDias) {
+        t4 = new double[cantCamiones][7];
+        double c1 = 0,c2 = 0,c3 = 0;
+        int k = 0;
+        
+        for (int j = 0; j < cantDias; j++) {
+            for (int i = 0; i < t1[j][2]; i++) {
+                t4[k][0] = j+1;
+                t4[k][1] = j+2;
+                t4[k][2] = t2[k][3];
+                t4[k][3] = t2[k][4];
+                t4[k][4] = t3[k][4];
+                t4[k][5] = t4[k][4]/t4[k][3];
+                if (c1 <= c2 && c1 <= c3) {
+                    c1 = t4[k][5];
+                    t4[k][6] = 1;
+                } else {
+                    if (c2 <= c1 && c2 <= c3) {
+                        c2 = t4[k][5];
+                        t4[k][6] = 2;
+                    } else {
+                        c3 = t4[k][5];
+                        t4[k][6] = 3;
+                    }
+                }
+            }
+        }
+    }
+    void tablaCuadrillaHora() {
+        
+        
+    }
+    
     double tipoGenerador(int g) {
         double [][] r;
         Generador obj1 = new Generador();
@@ -327,18 +367,14 @@ class Resultado extends Tablas {
         }
         return v;
     }
-    
     void simulacion(int cantDias) {
         int cantC;
         
         tablaCamiones(cantDias);
         cantC = cantidadCamiones(t1);
-        tablaTipoCarga(cantC);
-        tablaKilogramos(cantC);
-        Generador m = new Generador();
-        m.mostrar(t1);
-        m.mostrar(t2);
-        m.mostrar(t3);
+        tablaTipoCarga(cantC,cantDias);
+        tablaKilogramos(cantC,cantDias);
+        tablaCuadrilla(cantC,cantDias);
     }
 }
 
@@ -390,7 +426,7 @@ public class Simulacion {
 //        obj1.mostrar(obj1.cuadrado(580, 3, 10));
 //        obj1.mostrar(obj1.producto(420, 180, 3, 10));
 //        obj1.mostrar(obj1.productoVariado(382, 125, 3, 10));
-//        obj1.mostrar(obj1.multiplicativo(9, 11, 128, 10));
-//        obj1.mostrar(obj1.mixto(21, 17, 23, 1000, 60));
+//        obj1.mostrar(obj1.multiplicativo(461, 261, 512, 50));
+//        obj1.mostrar(obj1.mixto(17, 47, 43, 1000, 6));
     }
 }
