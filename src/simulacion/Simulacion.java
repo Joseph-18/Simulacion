@@ -311,14 +311,14 @@ class Resultado extends Tablas {
                 t4[k][4] = t3[k][4];
                 t4[k][5] = t4[k][4]/t4[k][3];
                 if (c1 <= c2 && c1 <= c3) {
-                    c1 = t4[k][5];
+                    c1 += t4[k][5];
                     t4[k][6] = 1;
                 } else {
                     if (c2 <= c1 && c2 <= c3) {
-                        c2 = t4[k][5];
+                        c2 += t4[k][5];
                         t4[k][6] = 2;
                     } else {
-                        c3 = t4[k][5];
+                        c3 += t4[k][5];
                         t4[k][6] = 3;
                     }
                 }
