@@ -6,7 +6,7 @@
 package simulacion;
 /**
  *
- * @authores Joseph Pérez, Gabriel Rodríguez
+ * @authores Joseph Pérez, Gabriel Rodríguez, Jesús Salazar.
  */
 
 class Generador {
@@ -292,7 +292,7 @@ class Resultado extends Tablas {
                 t3[k][1] = i+1;
                 t3[k][2] = t2[k][3];
                 t3[k][3] = tipoGenerador(g);
-                t3[k][4] = k1.getKilogramos(t3[k][2]);
+                t3[k][4] = k1.getKilogramos(t3[k][3]);
                 k += 1;
             }
         }
@@ -322,14 +322,46 @@ class Resultado extends Tablas {
                         t4[k][6] = 3;
                     }
                 }
+                k += 1;
             }
+            c1 = 0;
+            c2 = 0;
+            c3 = 0;
         }
     }
-    void tablaCuadrillaHora() {
+    void tablaCuadrillaHora(int cantCamiones, int cantDias) {
+        t5 = new double[cantCamiones][6];
+        double c1 = 0,c2 = 0,c3 = 0;
+        int k = 0;
         
+        for (int j = 0; j < cantDias; j++) {
+            for (int i = 0; i < t1[j][2]; i++) {
+                t4[k][0] = j+1;
+                t4[k][1] = j+2;
+                t4[k][2] = t2[k][3];
+                t4[k][3] = t2[k][4];
+                t4[k][4] = t3[k][4];
+                t4[k][5] = t4[k][4]/t4[k][3];
+                if (c1 <= c2 && c1 <= c3) {
+                    c1 = t4[k][5];
+                    t4[k][6] = 1;
+                } else {
+                    if (c2 <= c1 && c2 <= c3) {
+                        c2 = t4[k][5];
+                        t4[k][6] = 2;
+                    } else {
+                        c3 = t4[k][5];
+                        t4[k][6] = 3;
+                    }
+                }
+                k += 1;
+            }
+            c1 = 0;
+            c2 = 0;
+            c3 = 0;
+        }
         
     }
-    
     double tipoGenerador(int g) {
         double [][] r;
         Generador obj1 = new Generador();
