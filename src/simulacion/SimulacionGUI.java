@@ -144,9 +144,6 @@ public class SimulacionGUI extends JFrame {
         formA.setVisible(false);
         formC.setVisible(false);
         formM.setVisible(false);*/
-        
-
-        
            
         cboxmetodop1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         cboxmetodop1.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Cuadrado Medio", "Producto Medio", "Producto Medio Variado","Congruencial Multiplicativo", "Congruencial Mixto"}));
@@ -234,9 +231,7 @@ public class SimulacionGUI extends JFrame {
         btnsimularp1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 
-                
-
-                
+                  
                 int x0 =(int) formXoSp.getValue();
                 int k = (int)formKsp.getValue();
                 int n = (int) spinnerdiasp1.getValue();
@@ -244,7 +239,7 @@ public class SimulacionGUI extends JFrame {
                 int a = (int) formAsp.getValue();
                 int m = (int) formMsp.getValue();
                 int c = (int) formCsp.getValue();
-                int g = (int) cboxmetodop1.getSelectedIndex();
+                int g = (int) cboxmetodop1.getSelectedIndex()+1;
                 
                 Resultado R1 = new Resultado(x0, k, n, x1, a, m, c, g);
                 R1.simulacion(n);

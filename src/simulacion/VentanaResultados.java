@@ -40,6 +40,7 @@ public class VentanaResultados extends javax.swing.JFrame {
     }
 
     Object[][] t1;
+    Object[][] t2;
     int ctc;
     public VentanaResultados(Resultado R1) {
         
@@ -48,6 +49,29 @@ public class VentanaResultados extends javax.swing.JFrame {
         this.t1[i]= new Object[]{(int)R1.t1[i][0]+1,R1.t1[i][1],(int)R1.t1[i][2]};
         }
         ctc = R1.cantidadCamiones(R1.t1);
+        
+        this.t2 = new Object[R1.t2.length][R1.t2[0].length];
+        for (int i = 0; i < R1.t2.length; i++) {
+            
+            Double tc = R1.t2[i][3];
+            String tipo="-";
+            switch(tc.intValue()){
+                case 0:{
+                  tipo="A"; 
+                  break;
+                }
+                case 1:{
+                  tipo="B"; 
+                  break;  
+                }
+                case 2:{
+                  tipo="C"; 
+                  break;  
+                }
+            }
+            this.t2[i]= new Object[]{(int)R1.t2[i][0]+1,(int)R1.t2[i][1],R1.t2[i][2],tipo,(int)R1.t2[i][4]};
+        }
+
         initComponents();
         
     }
@@ -63,6 +87,9 @@ public class VentanaResultados extends javax.swing.JFrame {
         jTable6 = new javax.swing.JTable();
         siguiente2 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
         VistaEnunciado = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -88,8 +115,9 @@ public class VentanaResultados extends javax.swing.JFrame {
         VistaResultado1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         cantidadtotalcamiones.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        cantidadtotalcamiones.setText(ctc +" Cam/día");
-        VistaResultado1.add(cantidadtotalcamiones, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 120, 20));
+        cantidadtotalcamiones.setText(ctc +" Camiones en total"
+        );
+        VistaResultado1.add(cantidadtotalcamiones, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 160, 20));
 
         jTable6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable6.setModel(new javax.swing.table.DefaultTableModel(t1
@@ -119,11 +147,40 @@ public class VentanaResultados extends javax.swing.JFrame {
 
         siguiente2.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         siguiente2.setText("Siguiente");
-        VistaResultado1.add(siguiente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 610, 130, -1));
+        VistaResultado1.add(siguiente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 610, 130, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel8.setText("Tabla #4 resultados");
-        VistaResultado1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        jLabel8.setText("Tabla #5 resultados");
+        VistaResultado1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
+
+        jTable4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(t2,
+            new String [] {
+                "Dia", "N°Camion", "Rn", "Tipo de Carga", "Velocidad(Kg/h)"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(jTable4);
+
+        VistaResultado1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 510, 240));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel9.setText("Tabla #4 resultados");
+        VistaResultado1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -297,14 +354,17 @@ public class VentanaResultados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable6;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton siguiente1;
