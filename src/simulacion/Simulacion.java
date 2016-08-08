@@ -415,11 +415,11 @@ public class Simulacion {
     public static void main(String[] args) {
         
 //        // Interfaz grafica
-//        configStyleGUI("Windows"); //Estilo o Diseño
-//        // Orden de los parametros de la ventana: (ancho,altura,titulo)
-//        SimulacionGUI GUI = new SimulacionGUI(800,600,"Simulación");
-//        mostrarGUI(GUI);
-        // Fin
+        configStyleGUI("Windows"); //Estilo o Diseño
+        // Orden de los parametros de la ventana: (ancho,altura,titulo)
+        SimulacionGUI GUI = new SimulacionGUI(800,600,"Simulación");
+        mostrarGUI(GUI);
+        
         Generador obj1 = new Generador();        
         Resultado R1 = new Resultado(21, 0, 0, 0, 17, 1000, 23, 5);
         R1.simulacion(8);

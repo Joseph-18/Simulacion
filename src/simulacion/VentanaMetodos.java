@@ -26,7 +26,7 @@ public class VentanaMetodos extends javax.swing.JFrame {
 
         Generador gen = new Generador();
         double[][] tabla = null;
-        String[] titulo = new String[]{"n", "Xn", "Yn", "Xn+1", "Rn+1"};
+        String[] titulo = new String[]{"n","Xn","Yn","Xn+1","Rn+1"};
         String parametros = "Parametros: ";
         switch (metodo){
             case 0: {//Cuadrado Medio
@@ -114,6 +114,7 @@ public class VentanaMetodos extends javax.swing.JFrame {
         elem.setOpaque(true);
         return elem;
     }
+    
     static String entero(double value){   
         return String.valueOf((int)value);
     }
